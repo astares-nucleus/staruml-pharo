@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<APPROACH version="1.0"> 
+  <HEADER>
+    <NAME>Pharo</NAME>
+    <DISPLAYNAME>Pharo Approach</DISPLAYNAME>
+    <DESCRIPTION>Approach for Pharo</DESCRIPTION>
+  </HEADER>
+  <BODY>
+    <IMPORTPROFILES>
+		<PROFILE>pharo</PROFILE>
+    </IMPORTPROFILES>
+    <MODELSTRUCTURE>
+      <MODEL name="Logical View">
+        <DIAGRAM type="Class" name="Main" defaultDiagram="True"/>
+      </MODEL>
+    </MODELSTRUCTURE>
+  </BODY>
+</APPROACH>
+
