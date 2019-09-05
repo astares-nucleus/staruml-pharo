@@ -5,7 +5,7 @@ Class {
 	#name : #XDPObject,
 	#superclass : #XDPElement,
 	#instVars : [
-		'name'
+		'source'
 	],
 	#category : #'XPD-Core-Exporter-Model'
 }
@@ -18,12 +18,18 @@ XDPObject class >> isAbstract [
 
 { #category : #accessing }
 XDPObject >> name [
-	^ name
+
+	^source name
 ]
 
 { #category : #accessing }
-XDPObject >> name: anObject [
-	name := anObject
+XDPObject >> source [
+	^ source
+]
+
+{ #category : #accessing }
+XDPObject >> source: anObject [
+	source := anObject
 ]
 
 { #category : #defaults }

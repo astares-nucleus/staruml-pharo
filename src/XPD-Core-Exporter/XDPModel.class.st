@@ -7,6 +7,12 @@ Class {
 	#category : #'XPD-Core-Exporter-Model'
 }
 
+{ #category : #accessing }
+XDPModel >> name [
+
+	^'Pharo'
+]
+
 { #category : #defaults }
 XDPModel >> stereotypeName [
 

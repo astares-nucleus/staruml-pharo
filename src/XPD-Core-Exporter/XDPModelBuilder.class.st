@@ -5,7 +5,8 @@ Class {
 	#name : #XDPModelBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'packages'
+		'packages',
+		'packageTags'
 	],
 	#category : #'XPD-Core-Exporter-Export'
 }
@@ -21,23 +22,38 @@ XDPModelBuilder >> allSortedPharoPackages [
 XDPModelBuilder >> build [
 	<script: 'self new build'>
 	
-	self allSortedPharoPackages do: [:each | 
-		self buildXDPPackageFor: each	
-	].
-self inspect
+	self buildPackages.
+	self inspect
 ]
 
-{ #category : #building }
+{ #category : #'private - building' }
+XDPModelBuilder >> buildPackages [
+
+	self allSortedPharoPackages do: [:each | 
+		self buildXDPPackageFor: each	].
+]
+
+{ #category : #'private - building' }
 XDPModelBuilder >> buildXDPPackageFor: anRPackage [
 
 	| package |
-	package := XDPPackage new.
-	package name: anRPackage name.
-	packages at: anRPackage name asSymbol put: package
+	package := XDPPackage source: anRPackage.	
+	packages at: anRPackage name asSymbol put: package.
+	packages actualClassTags do: [:each | self buildXDPPackageTagFor: each in: package ]
+]
+
+{ #category : #'private - building' }
+XDPModelBuilder >> buildXDPPackageTagFor: anRPackageTag in: anRPackage [
+
+	| packageTag |
+	packageTag := XDPPackageTag new.
+	packageTag name: anRPackageTag name.
+	packageTags at: anRPackage name asSymbol -> anRPackageTag name asSymbol put: packageTag
 ]
 
 { #category : #'private - initialization' }
 XDPModelBuilder >> initialize [
 	super initialize.
 	packages := Dictionary new.
+	packageTags := Dictionary new.
 ]
