@@ -39,16 +39,18 @@ XDPModelBuilder >> buildXDPPackageFor: anRPackage [
 	| package |
 	package := XDPPackage source: anRPackage.	
 	packages at: anRPackage name asSymbol put: package.
-	packages actualClassTags do: [:each | self buildXDPPackageTagFor: each in: package ]
+	(anRPackage actualClassTags 
+		sorted: [:a1 :a2 | a1 name < a2 name ]) 
+		do: [:each | self buildXDPPackageTagFor: each in: package ]
 ]
 
 { #category : #'private - building' }
-XDPModelBuilder >> buildXDPPackageTagFor: anRPackageTag in: anRPackage [
+XDPModelBuilder >> buildXDPPackageTagFor: anRPackageTag in: anXDPPackage [
 
 	| packageTag |
-	packageTag := XDPPackageTag new.
-	packageTag name: anRPackageTag name.
-	packageTags at: anRPackage name asSymbol -> anRPackageTag name asSymbol put: packageTag
+	packageTag := XDPPackageTag source: anRPackageTag.
+	anXDPPackage addOwnedElement: packageTag.
+	packageTags at: anXDPPackage name asSymbol -> anRPackageTag name asSymbol put: packageTag
 ]
 
 { #category : #'private - initialization' }
