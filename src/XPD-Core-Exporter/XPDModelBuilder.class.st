@@ -108,13 +108,24 @@ XPDModelBuilder >> buildXDPClassFor: aClass in: aXDPPackageTag [
 { #category : #'private - building' }
 XPDModelBuilder >> buildXDPPackageFor: anRPackage [
 
-	| package |
+	| package untagged |
+
 	package := XPDPackage source: anRPackage.	
 	model addOwnedElement: package.
 	packages at: anRPackage name asSymbol put: package.
 	(anRPackage actualClassTags 
 		sorted: [:a1 :a2 | a1 name < a2 name ]) 
-		do: [:each | self buildXDPPackageTagFor: each in: package ]
+		do: [:each | self buildXDPPackageTagFor: each in: package ].
+		
+
+		
+	untagged := anRPackage classes select: [:each | 
+			(anRPackage classTagForClass: each) notNil and: [ (anRPackage classTagForClass: each) name = anRPackage name ]  ].
+	untagged do: [:each | 
+		 self buildXDPClassFor: each in: package ].
+		
+		
+
 ]
 
 { #category : #'private - building' }
