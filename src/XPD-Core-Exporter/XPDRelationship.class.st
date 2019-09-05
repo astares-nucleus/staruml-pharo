@@ -11,6 +11,15 @@ Class {
 	#category : #'XPD-Core-Exporter-Model'
 }
 
+{ #category : #'instance creation' }
+XPDRelationship class >> from: aClass to: aSuperclass [
+
+	^(self new)
+		from: aClass;
+		to: aSuperclass;
+		yourself
+]
+
 { #category : #testing }
 XPDRelationship class >> isAbstract [ 
 	^self name = #XPDRelationship

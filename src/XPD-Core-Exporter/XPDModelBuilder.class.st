@@ -64,7 +64,7 @@ XPDModelBuilder >> buildPackages [
 ]
 
 { #category : #'private - building relationships' }
-XPDModelBuilder >> buildRealizationBetween: aXPDClass andSuperclass: aXDPTrait [ 
+XPDModelBuilder >> buildRealizationBetween: aXPDClass andTrait: aXDPTrait [ 
 
 	model addOwnedElement: (XPDRealization from: aXPDClass to: aXDPTrait)
 ]
@@ -75,7 +75,7 @@ XPDModelBuilder >> buildRealizations [
 	
 	| traitWrapper |
 	classes do: [:each | 
-		each source traitsDo: [:trait |
+		each source traits do: [:trait |
 			traitWrapper := classes at: trait name asSymbol ifAbsent: [].
 			traitWrapper ifNotNil: [ self buildRealizationBetween: each andTrait: traitWrapper ]]]
 ]
