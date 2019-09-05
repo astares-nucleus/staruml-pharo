@@ -72,9 +72,38 @@ XPDFile >> stream: anObject [
 { #category : #visiting }
 XPDFile >> visitXDPModel: aModel [
 	self indent: 2.
-	stream 
-		nextPutAll: '<XPD:OBJ name="DocumentElement" type="UMLModel" guid="';
-		nextPutAll: aModel guid asString
+	self 
+		raw: '<XPD:OBJ name="DocumentElement" type="UMLModel" guid="';
+		raw: aModel guid asString;
+		raw: '">';
+		newLine;
+		indent: 3;
+		raw: '<XPD:ATTR name="Name" type="string">';
+		raw: aModel name;
+		raw: '</XPD:ATTR>';
+		newLine; 
+		indent: 3;
+		raw: '<XPD:ATTR name="StereotypeProfile" type="string">pharo</XPD:ATTR>';
+		newLine;
+		indent: 3;
+		raw: '<XPD:ATTR name="StereotypeName" type="string">model</XPD:ATTR>'.
+	
+	aModel ownedElements ifNotEmpty: [ 
+		
+		self
+			newLine; 
+			indent: 3; 
+			raw: '<XPD:ATTR name="#OwnedElements" type="integer">';
+			raw: 	aModel ownedElements size asString; 
+			raw: '</XPD:ATTR>'	
+	].
+		
+	self 
+		newLine;
+		indent: 2;
+		raw: '</XPD:OBJ>'
+	
+		
 ]
 
 { #category : #writing }
@@ -97,14 +126,18 @@ XPDFile >> writeIntro [
 
 { #category : #'private - writing' }
 XPDFile >> writeModel [
+	self openTag: 'XPD:BODY' indent: 1.
+	builder model visit: self.
+	self closeTag: 'XPD:BODY' indent: 1.
 
-	builder model visit: self 
 ]
 
 { #category : #'private - writing' }
 XPDFile >> writeOutro [ 
-	
-	stream closeTag: 'XPD:UNIT' indent: 0
+
+	self 
+		newLine;
+		closeTag: 'XPD:UNIT' indent: 0
 ]
 
 { #category : #'private - writing' }

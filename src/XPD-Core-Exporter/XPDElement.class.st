@@ -19,3 +19,9 @@ XPDElement >> guid [
 XPDElement >> guid: anObject [
 	guid := anObject
 ]
+
+{ #category : #initialization }
+XPDElement >> initialize [
+	super initialize.
+	guid := UUID new asString copyReplaceAll: '-' with: String empty
+]
