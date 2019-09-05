@@ -117,38 +117,8 @@ XPDFile >> visitXDPClass: anXDPClass with: anIndex [
 
 { #category : #visiting }
 XPDFile >> visitXDPGeneralization: aGeneralization with: anIndex [
-	self
-		newLine;
-		indent: 3; 
-		raw: '<XPD:OBJ name="OwnedElements[';
-		raw: anIndex asString;
-		raw: ']" type="UMLGeneralization" guid="';
-		raw: aGeneralization guid;
-		raw: '">'.
-		
-	self 
-		newLine;	
-		indent: 3;
-		raw: '<XPD:REF name="Namespace">';
-		raw: aGeneralization parent guid;
-		raw: '</XPD:REF>'.
-		
-	self 
-		newLine;	
-		indent: 3;
-		raw: '<XPD:REF name="Client">';
-		raw: aGeneralization from guid;
-		raw: '</XPD:REF>'.
-	
-	self 
-		newLine;	
-		indent: 3;
-		raw: '<XPD:REF name="Supplier">';
-		raw: aGeneralization to guid;
-		raw: '</XPD:REF>'.	
-	
-	self 
-		closeTag: 'XPD:OBJ' indent: 3 newLine: true
+
+	self writeXDPRelationship: aGeneralization stereotype: 'UMLGeneralization' with: anIndex
 ]
 
 { #category : #visiting }
@@ -250,6 +220,12 @@ XPDFile >> visitXDPPackageTag: anXDPPackageTag with: anIndex [
 ]
 
 { #category : #visiting }
+XPDFile >> visitXDPRealization: aRealization with: anIndex [
+
+	self writeXDPRelationship: aRealization stereotype: 'UMLRealization' with: anIndex
+]
+
+{ #category : #visiting }
 XPDFile >> visitXDPTrait: anXDPTrait with: anIndex [
 	self
 		newLine;
@@ -312,6 +288,44 @@ XPDFile >> writeOwnedElementsOf: anXDPObject indent: number [
 			raw: '</XPD:ATTR>'.
 			
 		anXDPObject ownedElements withIndexDo: [:each :index | each visit: self with: index - 1 ]]	
+]
+
+{ #category : #'private - writing basic' }
+XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype with: anIndex [
+	self
+		newLine;
+		indent: 3; 
+		raw: '<XPD:OBJ name="OwnedElements[';
+		raw: anIndex asString;
+		raw: ']" type="';
+		raw: aStereotype;
+		raw: '" guid="';
+		raw: aRelationship guid;
+		raw: '">'.
+		
+	self 
+		newLine;	
+		indent: 3;
+		raw: '<XPD:REF name="Namespace">';
+		raw: aRelationship parent guid;
+		raw: '</XPD:REF>'.
+		
+	self 
+		newLine;	
+		indent: 3;
+		raw: '<XPD:REF name="Client">';
+		raw: aRelationship from guid;
+		raw: '</XPD:REF>'.
+	
+	self 
+		newLine;	
+		indent: 3;
+		raw: '<XPD:REF name="Supplier">';
+		raw: aRelationship to guid;
+		raw: '</XPD:REF>'.	
+	
+	self 
+		closeTag: 'XPD:OBJ' indent: 3 newLine: true
 ]
 
 { #category : #'private - writing' }

@@ -30,6 +30,25 @@ XPDModelBuilder >> build [
 		buildRelations
 ]
 
+{ #category : #'private - building relationships' }
+XPDModelBuilder >> buildGeneralizationBetween: aXPDClass andSuperclass: aXPDClass2 [ 
+
+	model addOwnedElement: (XPDGeneralization from: aXPDClass to: aXPDClass2)
+]
+
+{ #category : #'private - building relationships' }
+XPDModelBuilder >> buildGeneralizations [
+	"We only have one superclass in Pharo"
+	
+	| superWrapper |
+	classes do: [:each | 
+		each source superclass ifNotNil: [:sup |
+			superWrapper := classes at: sup name asSymbol ifAbsent: [].
+			superWrapper ifNotNil: [ self buildGeneralizationBetween: each andSuperclass: superWrapper ]
+		]		
+	]
+]
+
 { #category : #'private - building' }
 XPDModelBuilder >> buildModel [
 
@@ -44,21 +63,28 @@ XPDModelBuilder >> buildPackages [
 		self buildXDPPackageFor: each ].
 ]
 
-{ #category : #'private - building' }
-XPDModelBuilder >> buildRelationBetween: aXPDClass andSuperclass: aXPDClass2 [ 
+{ #category : #'private - building relationships' }
+XPDModelBuilder >> buildRealizationBetween: aXPDClass andSuperclass: aXDPTrait [ 
 
-	model addOwnedElement: (XPDGeneralization from: aXPDClass to: aXPDClass2)
+	model addOwnedElement: (XPDRealization from: aXPDClass to: aXDPTrait)
+]
+
+{ #category : #'private - building relationships' }
+XPDModelBuilder >> buildRealizations [
+	"check for the traits"
+	
+	| traitWrapper |
+	classes do: [:each | 
+		each source traitsDo: [:trait |
+			traitWrapper := classes at: trait name asSymbol ifAbsent: [].
+			traitWrapper ifNotNil: [ self buildRealizationBetween: each andTrait: traitWrapper ]]]
 ]
 
 { #category : #'private - building' }
 XPDModelBuilder >> buildRelations [
-	| superWrapper |
-	classes do: [:each | 
-		each source superclass ifNotNil: [:sup |
-			superWrapper := classes at: sup name asSymbol ifAbsent: [].
-			superWrapper ifNotNil: [ self buildRelationBetween: each andSuperclass: superWrapper ]
-		]		
-	]
+	self 
+		buildGeneralizations;  "for superclass inheritance"
+		buildRealizations  	  "for Traits"
 ]
 
 { #category : #'private - building' }
