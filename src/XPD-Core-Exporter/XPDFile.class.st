@@ -118,7 +118,7 @@ XPDFile >> visitXDPClass: anXDPClass with: anIndex [
 { #category : #visiting }
 XPDFile >> visitXDPGeneralization: aGeneralization with: anIndex [
 
-	self writeXDPRelationship: aGeneralization stereotype: 'UMLGeneralization' with: anIndex
+	self writeXDPRelationship: aGeneralization stereotype: 'UMLGeneralization' from: 'Child' to: 'Parent' with: anIndex
 ]
 
 { #category : #visiting }
@@ -222,7 +222,7 @@ XPDFile >> visitXDPPackageTag: anXDPPackageTag with: anIndex [
 { #category : #visiting }
 XPDFile >> visitXDPRealization: aRealization with: anIndex [
 
-	self writeXDPRelationship: aRealization stereotype: 'UMLRealization' with: anIndex
+	self writeXDPRelationship: aRealization stereotype: 'UMLRealization' from: 'Client' to: 'Supplier' with: anIndex
 ]
 
 { #category : #visiting }
@@ -291,7 +291,8 @@ XPDFile >> writeOwnedElementsOf: anXDPObject indent: number [
 ]
 
 { #category : #'private - writing basic' }
-XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype with: anIndex [
+XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype for: otherEnd with: anIndex [
+ 
 	self
 		newLine;
 		indent: 3; 
@@ -320,7 +321,52 @@ XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype with: anI
 	self 
 		newLine;	
 		indent: 3;
-		raw: '<XPD:REF name="Supplier">';
+		raw: '<XPD:REF name="';
+		raw: otherEnd;
+		raw: '">';
+		raw: aRelationship to guid;
+		raw: '</XPD:REF>'.	
+	
+	self 
+		closeTag: 'XPD:OBJ' indent: 3 newLine: true
+]
+
+{ #category : #'private - writing basic' }
+XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype from: start to: otherEnd with: anIndex [
+ 
+	self
+		newLine;
+		indent: 3; 
+		raw: '<XPD:OBJ name="OwnedElements[';
+		raw: anIndex asString;
+		raw: ']" type="';
+		raw: aStereotype;
+		raw: '" guid="';
+		raw: aRelationship guid;
+		raw: '">'.
+		
+	self 
+		newLine;	
+		indent: 3;
+		raw: '<XPD:REF name="Namespace">';
+		raw: aRelationship parent guid;
+		raw: '</XPD:REF>'.
+		
+	self 
+		newLine;	
+		indent: 3;
+		raw: '<XPD:REF name="';
+		raw: start;		
+		raw: '">';
+		raw: aRelationship from guid;
+		raw: '</XPD:REF>'.
+	
+	self 
+		newLine;	
+		indent: 3;
+		raw: '<XPD:REF name="';
+		raw: otherEnd;
+		raw: '">';
 		raw: aRelationship to guid;
 		raw: '</XPD:REF>'.	
 	

@@ -21,6 +21,13 @@ XPDModelBuilder >> allSortedPharoPackages [
 		sorted: [:a1 :a2 | a1 name < a2 name ]
 ]
 
+{ #category : #'private - accessing' }
+XPDModelBuilder >> allSortedPharoPackagesDebug [
+	"Return a sorted list of all Pharo packages"
+	^Array with: (RPackage organizer packages 
+		sorted: [:a1 :a2 | a1 name < a2 name ]) first
+]
+
 { #category : #building }
 XPDModelBuilder >> build [
 	<script: 'self new build inspect'>
