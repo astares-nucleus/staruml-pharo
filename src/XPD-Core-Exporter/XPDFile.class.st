@@ -7,7 +7,8 @@ Class {
 	#name : #XPDFile,
 	#superclass : #Object,
 	#instVars : [
-		'stream'
+		'stream',
+		'builder'
 	],
 	#category : #'XPD-Core-Exporter-Base'
 }
@@ -23,10 +24,17 @@ XPDFile >> closeTag: aTag indent: times [
 	self newLine	
 ]
 
+{ #category : #'private - writing basic' }
+XPDFile >> indent: times [
+
+	times timesRepeat: [ stream tab ]
+]
+
 { #category : #initialization }
 XPDFile >> initialize [ 
 	super initialize.
-	stream := String new writeStream
+	stream := String new writeStream.
+	builder := XPDModelBuilder new build.
 ]
 
 { #category : #'private - writing basic' }
@@ -37,7 +45,7 @@ XPDFile >> newLine [
 { #category : #'private - writing basic' }
 XPDFile >> openTag: aTag indent: times [
 
-	times timesRepeat: [ stream tab ].
+	self indent: times.
 	stream 
 		nextPut: $<;
 		nextPutAll: aTag;
@@ -61,9 +69,18 @@ XPDFile >> stream: anObject [
 	stream := anObject
 ]
 
+{ #category : #visiting }
+XPDFile >> visitXDPModel: aModel [
+	self indent: 2.
+	stream 
+		nextPutAll: '<XPD:OBJ name="DocumentElement" type="UMLModel" guid="';
+		nextPutAll: aModel guid asString
+]
+
 { #category : #writing }
 XPDFile >> write [ 
 	self writeIntro.
+	self writeModel.
 	self writeOutro.
 		
 	^stream contents
@@ -76,6 +93,12 @@ XPDFile >> writeIntro [
 		raw: '<XPD:UNIT xmlns:XPD="http://www.staruml.com" version="1">';
 		newLine;
 		writeXPDHeader
+]
+
+{ #category : #'private - writing' }
+XPDFile >> writeModel [
+
+	builder model visit: self 
 ]
 
 { #category : #'private - writing' }

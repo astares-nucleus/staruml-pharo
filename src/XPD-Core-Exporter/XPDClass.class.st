@@ -2,13 +2,13 @@
 XDP class stereotype
 "
 Class {
-	#name : #XDPClass,
-	#superclass : #XDPObject,
+	#name : #XPDClass,
+	#superclass : #XPDXDPObject,
 	#category : #'XPD-Core-Exporter-Model'
 }
 
 { #category : #defaults }
-XDPClass >> stereotypeName [
+XPDClass >> stereotypeName [
 
 	^'class'
 ]

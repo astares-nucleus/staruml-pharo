@@ -2,7 +2,7 @@
 XDP realization relationship
 "
 Class {
-	#name : #XDPRealization,
-	#superclass : #XDPElement,
+	#name : #XPDRealization,
+	#superclass : #XPDElement,
 	#category : #'XPD-Core-Exporter-Model'
 }

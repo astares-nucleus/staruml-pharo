@@ -2,13 +2,13 @@
 A package tag
 "
 Class {
-	#name : #XDPPackageTag,
-	#superclass : #XDPObject,
+	#name : #XPDPackageTag,
+	#superclass : #XPDXDPObject,
 	#category : #'XPD-Core-Exporter-Model'
 }
 
 { #category : #defaults }
-XDPPackageTag >> stereotypeName [
+XPDPackageTag >> stereotypeName [
 
 	^'packagetag'
 ]

@@ -2,7 +2,7 @@
 An XDP Element
 "
 Class {
-	#name : #XDPElement,
+	#name : #XPDElement,
 	#superclass : #Object,
 	#instVars : [
 		'guid'
@@ -11,11 +11,11 @@ Class {
 }
 
 { #category : #accessing }
-XDPElement >> guid [
+XPDElement >> guid [
 	^ guid
 ]
 
 { #category : #accessing }
-XDPElement >> guid: anObject [
+XPDElement >> guid: anObject [
 	guid := anObject
 ]

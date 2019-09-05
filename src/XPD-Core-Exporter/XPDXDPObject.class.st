@@ -2,8 +2,8 @@
 General XDP object
 "
 Class {
-	#name : #XDPObject,
-	#superclass : #XDPElement,
+	#name : #XPDXDPObject,
+	#superclass : #XPDElement,
 	#instVars : [
 		'source',
 		'ownedElements'
@@ -12,13 +12,13 @@ Class {
 }
 
 { #category : #testing }
-XDPObject class >> isAbstract [ 
+XPDXDPObject class >> isAbstract [ 
 
-	^self name = #XDPObject
+	^self name = #XPDXDPObject
 ]
 
 { #category : #'instance creation' }
-XDPObject class >> source: anObject [
+XPDXDPObject class >> source: anObject [
 
 	^(self new)
 		source: anObject;
@@ -26,51 +26,51 @@ XDPObject class >> source: anObject [
 ]
 
 { #category : #accessing }
-XDPObject >> addOwnedElement: anObject [
+XPDXDPObject >> addOwnedElement: anObject [
 
 	^self ownedElements add: anObject 
 ]
 
 { #category : #initialization }
-XDPObject >> initialize [
+XPDXDPObject >> initialize [
 	super initialize.
 	ownedElements := OrderedCollection new.
 ]
 
 { #category : #accessing }
-XDPObject >> name [
+XPDXDPObject >> name [
 
 	^source name
 ]
 
 { #category : #accessing }
-XDPObject >> ownedElements [
+XPDXDPObject >> ownedElements [
 	^ ownedElements
 ]
 
 { #category : #accessing }
-XDPObject >> ownedElements: anObject [
+XPDXDPObject >> ownedElements: anObject [
 	ownedElements := anObject
 ]
 
 { #category : #accessing }
-XDPObject >> source [
+XPDXDPObject >> source [
 	^ source
 ]
 
 { #category : #accessing }
-XDPObject >> source: anObject [
+XPDXDPObject >> source: anObject [
 	source := anObject
 ]
 
 { #category : #defaults }
-XDPObject >> stereotypeName [
+XPDXDPObject >> stereotypeName [
 
 	^self subclassResponsibility 
 ]
 
 { #category : #defaults }
-XDPObject >> stereotypeProfile [
+XPDXDPObject >> stereotypeProfile [
 
 	^'pharo'
 ]
