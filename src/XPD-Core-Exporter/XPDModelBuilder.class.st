@@ -17,8 +17,12 @@ Class {
 { #category : #'private - accessing' }
 XPDModelBuilder >> allSortedPharoPackages [
 	"Return a sorted list of all Pharo packages"
-	^RPackage organizer packages 
-		sorted: [:a1 :a2 | a1 name < a2 name ]
+	| coll |
+	coll := (RPackage organizer packages 
+				sorted: [:a1 :a2 | a1 name < a2 name ])
+				asOrderedCollection.
+	coll remove: self class package.
+	^coll
 ]
 
 { #category : #'private - accessing' }
@@ -38,9 +42,12 @@ XPDModelBuilder >> build [
 ]
 
 { #category : #'private - building relationships' }
-XPDModelBuilder >> buildGeneralizationBetween: aXPDClass andSuperclass: aXPDClass2 [ 
+XPDModelBuilder >> buildGeneralizationBetween: aXPDClass andSuperclass: aXPDClass2 [
 
-	model addOwnedElement: (XPDGeneralization from: aXPDClass to: aXPDClass2)
+	| rel |
+	rel := XPDGeneralization from: aXPDClass to: aXPDClass2.
+	model addOwnedElement: rel.
+	relations add: rel
 ]
 
 { #category : #'private - building relationships' }
@@ -73,7 +80,10 @@ XPDModelBuilder >> buildPackages [
 { #category : #'private - building relationships' }
 XPDModelBuilder >> buildRealizationBetween: aXPDClass andTrait: aXDPTrait [ 
 
-	model addOwnedElement: (XPDRealization from: aXPDClass to: aXDPTrait)
+	| rel |
+	rel := XPDRealization from: aXPDClass to: aXDPTrait.
+	model addOwnedElement: rel.
+	relations add: rel
 ]
 
 { #category : #'private - building relationships' }
