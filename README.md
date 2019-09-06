@@ -1,5 +1,5 @@
 # staruml-pharo
-(White)StarUML extensions for Pharo
+[(White)StarUML](https://sourceforge.net/projects/whitestaruml/files/) extensions for [Pharo](http://www.pharo.org)
 
 ![alt text](doc/screen005.png "Use Pharo classes within WhiteStarUML")
 
