@@ -225,6 +225,7 @@
 					<PALETTEITEM>Generalization</PALETTEITEM>
 					<PALETTEITEM>Realization</PALETTEITEM>				
 					<PALETTEITEM>Association</PALETTEITEM>
+					<PALETTEITEM>Dependency</PALETTEITEM>
 					<PALETTEITEM>DirectedAssociation</PALETTEITEM>					
 					<PALETTEITEM>Composition</PALETTEITEM>
 				</PALETTEITEMLIST>
