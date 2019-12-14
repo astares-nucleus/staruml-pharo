@@ -10,8 +10,8 @@
 		<PROFILE>Pharo</PROFILE>
     </IMPORTPROFILES>
     <MODELSTRUCTURE>
-      <MODEL name="Logical View">
-        <DIAGRAM type="ClassDiagram" name="Main" defaultDiagram="True"/>
+      <MODEL name="Project 1" stereotypeProfile="Pharo" stereotypeName="model">
+        <DIAGRAM type="Class" diagramTypeProfile="Pharo" diagramTypeName="Class Diagram " name="Main" defaultDiagram="True"/>
       </MODEL>
     </MODELSTRUCTURE>
   </BODY>
