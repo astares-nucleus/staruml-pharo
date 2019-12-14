@@ -7,11 +7,11 @@
   </HEADER>
   <BODY>
     <IMPORTPROFILES>
-		<PROFILE>pharo</PROFILE>
+		<PROFILE>Pharo</PROFILE>
     </IMPORTPROFILES>
     <MODELSTRUCTURE>
       <MODEL name="Logical View">
-        <DIAGRAM type="Class" name="Main" defaultDiagram="True"/>
+        <DIAGRAM type="ClassDiagram" name="Main" defaultDiagram="True"/>
       </MODEL>
     </MODELSTRUCTURE>
   </BODY>
