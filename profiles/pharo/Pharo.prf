@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <PROFILE version="1.0">
 	<HEADER>
-		<NAME>pharo</NAME>
+		<NAME>Pharo</NAME>
 		<DISPLAYNAME>Pharo Profile</DISPLAYNAME>
 		<DESCRIPTION>Pharo Modeling Profile</DESCRIPTION>
 		<AUTOINCLUDE>False</AUTOINCLUDE>
