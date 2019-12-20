@@ -252,7 +252,7 @@
 		<DIAGRAMTYPELIST>
 			<DIAGRAMTYPE>
 				<NAME>Class Diagram </NAME>
-				<DISPLAYNAME>Pharo Class Diagram</DISPLAYNAME>
+				<DISPLAYNAME>Class Diagram</DISPLAYNAME>
 				<BASEDIAGRAM>ClassDiagram</BASEDIAGRAM>
 				<ICON>pharodiagram.bmp</ICON>
 				<AVAILABLEPALETTELIST>
@@ -264,7 +264,7 @@
 		<MODELPROTOTYPELIST>
 			<MODELPROTOTYPE>
 			    <NAME>Project </NAME>
-			    <DISPLAYNAME>PharoModel</DISPLAYNAME>
+			    <DISPLAYNAME>Model</DISPLAYNAME>
 			    <ICON>pharoproject.bmp</ICON>
 			    <BASEMODEL>Model</BASEMODEL>
 			    <STEREOTYPENAME>model</STEREOTYPENAME>
