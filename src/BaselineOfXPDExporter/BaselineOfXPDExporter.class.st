@@ -3,7 +3,7 @@ XPD exporter for Pharo https://github.com/astares-nucleus/staruml-pharo
 "
 Class {
 	#name : #BaselineOfXPDExporter,
-	#superclass : #Object,
+	#superclass : #BaselineOf,
 	#category : #BaselineOfXPDExporter
 }
 
