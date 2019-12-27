@@ -203,7 +203,7 @@ XPDFile >> visitXDPPackageTag: anXDPPackageTag with: anIndex [
 		raw: '</XPD:ATTR>';
 		newLine;
 		indent: 5;		
-		raw: '<XPD:ATTR name="StereotypeProfile" type="string">Ppharo</XPD:ATTR>';
+		raw: '<XPD:ATTR name="StereotypeProfile" type="string">Pharo</XPD:ATTR>';
 		newLine;
 		indent: 5;
 		raw: '<XPD:ATTR name="StereotypeName" type="string">tag</XPD:ATTR>';

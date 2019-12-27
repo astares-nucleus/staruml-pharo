@@ -10,7 +10,7 @@ Class {
 { #category : #defaults }
 XPDPackageTag >> stereotypeName [
 
-	^'packagetag'
+	^'tag'
 ]
 
 { #category : #visiting }
