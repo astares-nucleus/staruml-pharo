@@ -264,8 +264,12 @@ XPDFile >> visitXDPTrait: anXDPTrait with: anIndex [
 XPDFile >> write [
 	self writeXMLHeader.
 	self writeXDPUnit.
-	Clipboard clipboardText: stream contents.
-	^ stream contents
+	
+]
+
+{ #category : #writing }
+XPDFile >> writeFile [
+	
 ]
 
 { #category : #'private - writing' }
@@ -288,6 +292,13 @@ XPDFile >> writeOwnedElementsOf: anXDPObject indent: number [
 			raw: '</XPD:ATTR>'.
 			
 		anXDPObject ownedElements withIndexDo: [:each :index | each visit: self with: index - 1 ]]	
+]
+
+{ #category : #writing }
+XPDFile >> writeToClipboard [
+	self write.
+	Clipboard clipboardText: stream contents.
+	^ stream contents
 ]
 
 { #category : #'private - writing basic' }
