@@ -47,7 +47,18 @@ Just include the provided **Pharo profile**.
 
 # Generating Pharo classes for use within UML Tool
 
-There is a small utility package included in this project within the *src* folder. It is written in [Pharo](http://www.pharo.org) itself to generate a file in XDP Format. The utility allows you to generate the Pharo class hierarchy of an existing image into a model file and use it as a Unit file within WhiteStarUML.
+There is a small utility package included in this project within the *src* folder. It is written in [Pharo](http://www.pharo.org) itself to generate a file in XDP Format. 
+
+## Quick Start
+
+```Smalltalk
+Metacello new 
+	repository: 'github://astares-nucleus/staruml-pharo/src';
+	baseline: 'XPDExporter';
+	load 	
+```
+
+The utility allows you to generate the Pharo class hierarchy of an existing image into a model file and use it as a Unit file within WhiteStarUML.
 
 To export just evaluate
 
