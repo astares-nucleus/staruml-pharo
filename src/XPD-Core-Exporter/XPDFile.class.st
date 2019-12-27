@@ -99,7 +99,7 @@ XPDFile >> visitXDPClass: anXDPClass with: anIndex [
 		raw: '</XPD:ATTR>';
 		newLine;
 		indent: 6;		
-		raw: '<XPD:ATTR name="StereotypeProfile" type="string">pharo</XPD:ATTR>';
+		raw: '<XPD:ATTR name="StereotypeProfile" type="string">Pharo</XPD:ATTR>';
 		newLine;
 		indent: 6;
 		raw: '<XPD:ATTR name="StereotypeName" type="string">class</XPD:ATTR>';
@@ -137,7 +137,7 @@ XPDFile >> visitXDPModel: aModel [
 		raw: '</XPD:ATTR>';
 		newLine; 
 		indent: 3;
-		raw: '<XPD:ATTR name="StereotypeProfile" type="string">pharo</XPD:ATTR>';
+		raw: '<XPD:ATTR name="StereotypeProfile" type="string">Pharo</XPD:ATTR>';
 		newLine;
 		indent: 3;
 		raw: '<XPD:ATTR name="StereotypeName" type="string">model</XPD:ATTR>'.
@@ -168,7 +168,7 @@ XPDFile >> visitXDPPackage: anXDPPackage with: anIndex [
 		raw: '</XPD:ATTR>';
 		newLine;
 		indent: 4;		
-		raw: '<XPD:ATTR name="StereotypeProfile" type="string">pharo</XPD:ATTR>';
+		raw: '<XPD:ATTR name="StereotypeProfile" type="string">Pharo</XPD:ATTR>';
 		newLine;
 		indent: 4;
 		raw: '<XPD:ATTR name="StereotypeName" type="string">package</XPD:ATTR>';
@@ -203,10 +203,10 @@ XPDFile >> visitXDPPackageTag: anXDPPackageTag with: anIndex [
 		raw: '</XPD:ATTR>';
 		newLine;
 		indent: 5;		
-		raw: '<XPD:ATTR name="StereotypeProfile" type="string">pharo</XPD:ATTR>';
+		raw: '<XPD:ATTR name="StereotypeProfile" type="string">Ppharo</XPD:ATTR>';
 		newLine;
 		indent: 5;
-		raw: '<XPD:ATTR name="StereotypeName" type="string">packagetag</XPD:ATTR>';
+		raw: '<XPD:ATTR name="StereotypeName" type="string">tag</XPD:ATTR>';
 		newLine;
 		indent: 5;
 		raw: '<XPD:REF name="Namespace">';
@@ -244,7 +244,7 @@ XPDFile >> visitXDPTrait: anXDPTrait with: anIndex [
 		raw: '</XPD:ATTR>';
 		newLine;
 		indent: 6;		
-		raw: '<XPD:ATTR name="StereotypeProfile" type="string">pharo</XPD:ATTR>';
+		raw: '<XPD:ATTR name="StereotypeProfile" type="string">Pharo</XPD:ATTR>';
 		newLine;
 		indent: 6;
 		raw: '<XPD:ATTR name="StereotypeName" type="string">trait</XPD:ATTR>';
