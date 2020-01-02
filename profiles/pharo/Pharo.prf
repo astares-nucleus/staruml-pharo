@@ -90,7 +90,7 @@
 			</STEREOTYPE>
 		</STEREOTYPELIST>
 
-		<TAGDEFINITIONSETLIST>
+		<TAGDEFINITIONSETLIST>		
 			<TAGDEFINITIONSET>
 				<NAME>Package</NAME>
 				<BASECLASSES>
@@ -114,11 +114,65 @@
 					</TAGDEFINITION>
 				</TAGDEFINITIONLIST>
 			</TAGDEFINITIONSET>
+			<TAGDEFINITIONSET>
+				<NAME>Attribute</NAME>
+				<BASECLASSES>
+					<BASECLASS>UMLAttribute</BASECLASS>
+				</BASECLASSES>
+				<TAGDEFINITIONLIST>
+					<TAGDEFINITION lock="False">
+						<NAME>Generator Ignore Getter</NAME>
+						<TAGTYPE>Boolean</TAGTYPE>
+						<DEFAULTDATAVALUE>False</DEFAULTDATAVALUE>
+					</TAGDEFINITION>
+					<TAGDEFINITION lock="False">
+						<NAME>Generator Ignore Setter</NAME>
+						<TAGTYPE>Boolean</TAGTYPE>
+						<DEFAULTDATAVALUE>False</DEFAULTDATAVALUE>
+					</TAGDEFINITION>	
+					<TAGDEFINITION lock="False">
+						<NAME>Generator Initializer</NAME>
+						<TAGTYPE>Enumeration</TAGTYPE>
+						<DEFAULTDATAVALUE>Lazy</DEFAULTDATAVALUE>
+						<LITERALS>
+							<LITERAL>None</LITERAL>
+							<LITERAL>Lazy</LITERAL>
+							<LITERAL>Initial</LITERAL>							
+						</LITERALS>
+					</TAGDEFINITION>					
+				</TAGDEFINITIONLIST>
+			</TAGDEFINITIONSET>
+			<TAGDEFINITIONSET>
+				<NAME>Association End</NAME>
+				<BASECLASSES>
+					<BASECLASS>UMLAssociationEnd</BASECLASS>
+				</BASECLASSES>
+				<TAGDEFINITIONLIST>
+					<TAGDEFINITION lock="False">
+						<NAME>Generator Ignore Getter</NAME>
+						<TAGTYPE>Boolean</TAGTYPE>
+						<DEFAULTDATAVALUE>False</DEFAULTDATAVALUE>
+					</TAGDEFINITION>
+					<TAGDEFINITION lock="False">
+						<NAME>Generator Ignore Setter</NAME>
+						<TAGTYPE>Boolean</TAGTYPE>
+						<DEFAULTDATAVALUE>False</DEFAULTDATAVALUE>
+					</TAGDEFINITION>	
+					<TAGDEFINITION lock="False">
+						<NAME>Generator Initializer</NAME>
+						<TAGTYPE>Enumeration</TAGTYPE>
+						<DEFAULTDATAVALUE>Lazy</DEFAULTDATAVALUE>
+						<LITERALS>
+							<LITERAL>None</LITERAL>
+							<LITERAL>Lazy</LITERAL>
+							<LITERAL>Initial</LITERAL>							
+						</LITERALS>
+					</TAGDEFINITION>					
+				</TAGDEFINITIONLIST>
+			</TAGDEFINITIONSET>
 		</TAGDEFINITIONSETLIST>
-
 		<DATATYPELIST>
 		</DATATYPELIST>
-
 		<ELEMENTPROTOTYPELIST>
 			<ELEMENTPROTOTYPE>
 				<NAME>PharoModel</NAME>
