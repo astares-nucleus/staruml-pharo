@@ -10,7 +10,7 @@
 
 First install the free [WhitestarUML](https://sourceforge.net/projects/whitestaruml/files/) UML tool on your local Windows machine.
 
-We recommend to install it into the folder
+We recommend to install it into the following folder
 
 ```
 c:\astares\tools\WhiteStarUML
