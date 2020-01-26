@@ -137,7 +137,7 @@
 						<LITERALS>
 							<LITERAL>None</LITERAL>
 							<LITERAL>Lazy</LITERAL>
-							<LITERAL>Initial</LITERAL>							
+							<LITERAL>Instantiation</LITERAL>							
 						</LITERALS>
 					</TAGDEFINITION>					
 				</TAGDEFINITIONLIST>
@@ -165,7 +165,7 @@
 						<LITERALS>
 							<LITERAL>None</LITERAL>
 							<LITERAL>Lazy</LITERAL>
-							<LITERAL>Initial</LITERAL>							
+							<LITERAL>Instantiation</LITERAL>							
 						</LITERALS>
 					</TAGDEFINITION>					
 				</TAGDEFINITIONLIST>
