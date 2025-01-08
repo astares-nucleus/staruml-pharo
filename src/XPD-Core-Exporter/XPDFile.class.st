@@ -266,7 +266,7 @@ XPDFile >> visitXDPTrait: anXDPTrait with: anIndex [
 XPDFile >> write [
 	self writeXMLHeader.
 	self writeXDPUnit.
-	
+	^ stream contents
 ]
 
 { #category : 'writing' }
