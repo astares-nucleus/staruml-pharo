@@ -63,7 +63,7 @@ The utility allows you to generate the Pharo class hierarchy of an existing imag
 To export just evaluate
 
 ```Smalltalk
-XPDFile new write
+Clipboard clipboardText: XPDFile new write
 ```
 
 This generates the XDP XML structure and copies the result into the Clipboard. Just save the generated contents as WhiteStar UML unit control file (a file with a *.unt extension) and use it within the UML tool to browse and model based on Pharo classes:
