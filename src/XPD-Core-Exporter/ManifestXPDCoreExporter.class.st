@@ -17,6 +17,13 @@ ManifestXPDCoreExporter class >> ruleClassNotReferencedRuleV1FalsePositive [
 ]
 
 { #category : 'code-critics' }
+ManifestXPDCoreExporter class >> ruleModifiesCollectionRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#XPDModelBuilder #buildRealizations #false)) #'2025-01-08T02:22:28.827+01:00') )
+]
+
+{ #category : 'code-critics' }
 ManifestXPDCoreExporter class >> ruleRBModifiesCollectionRuleV1FalsePositive [
 	^ #(#(#(#RGMethodDefinition #(#XPDModelBuilder #buildGeneralizations #false)) #'2019-09-05T23:16:05.424943+02:00') )
 ]
