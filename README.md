@@ -8,7 +8,7 @@
 ## Installation 
 ### Install WhiteStarUML
 
-First install the free [WhitestarUML](https://sourceforge.net/projects/whitestaruml/files/) UML tool on your local Windows machine.
+First download and install the free [WhitestarUML](https://sourceforge.net/projects/whitestaruml/files/) UML tool on your local Windows machine.
 
 We recommend to install it into the following folder
 
