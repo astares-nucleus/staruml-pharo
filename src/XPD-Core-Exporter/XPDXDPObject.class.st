@@ -2,22 +2,24 @@
 General XDP object
 "
 Class {
-	#name : #XPDXDPObject,
-	#superclass : #XPDElement,
+	#name : 'XPDXDPObject',
+	#superclass : 'XPDElement',
 	#instVars : [
 		'source',
 		'ownedElements'
 	],
-	#category : #'XPD-Core-Exporter-Model'
+	#category : 'XPD-Core-Exporter-Model',
+	#package : 'XPD-Core-Exporter',
+	#tag : 'Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 XPDXDPObject class >> isAbstract [ 
 
 	^self name = #XPDXDPObject
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 XPDXDPObject class >> source: anObject [
 
 	^(self new)
@@ -25,35 +27,35 @@ XPDXDPObject class >> source: anObject [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDXDPObject >> addOwnedElement: anObject [
 	anObject parent: self.
 	^self ownedElements add: anObject 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 XPDXDPObject >> initialize [
 	super initialize.
 	ownedElements := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDXDPObject >> name [
 
 	^source name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDXDPObject >> ownedElements [
 	^ ownedElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDXDPObject >> ownedElements: anObject [
 	ownedElements := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 XPDXDPObject >> printOn: aStream [
 
 	super printOn: aStream.
@@ -63,23 +65,23 @@ XPDXDPObject >> printOn: aStream [
 		nextPutAll: self source name asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDXDPObject >> source [
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDXDPObject >> source: anObject [
 	source := anObject
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 XPDXDPObject >> stereotypeName [
 
 	^self subclassResponsibility 
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 XPDXDPObject >> stereotypeProfile [
 
 	^'pharo'

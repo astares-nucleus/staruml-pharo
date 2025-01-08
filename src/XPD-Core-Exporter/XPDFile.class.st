@@ -4,16 +4,18 @@ An XPD file
 See http://www.cs.sjsu.edu/faculty/pearce/modules/projects/oop/codeGen/codeGen.htm
 "
 Class {
-	#name : #XPDFile,
-	#superclass : #Object,
+	#name : 'XPDFile',
+	#superclass : 'Object',
 	#instVars : [
 		'stream',
 		'builder'
 	],
-	#category : #'XPD-Core-Exporter-Base'
+	#category : 'XPD-Core-Exporter-Base',
+	#package : 'XPD-Core-Exporter',
+	#tag : 'Base'
 }
 
-{ #category : #'private - writing basic' }
+{ #category : 'private - writing basic' }
 XPDFile >> closeTag: aTag indent: times [
 	times timesRepeat: [ stream tab ].
 	stream 
@@ -23,7 +25,7 @@ XPDFile >> closeTag: aTag indent: times [
 	
 ]
 
-{ #category : #'private - writing basic' }
+{ #category : 'private - writing basic' }
 XPDFile >> closeTag: aTag indent: times newLine: aBoolean [
 
 	aBoolean ifTrue: [ self newLine ].	
@@ -35,25 +37,25 @@ XPDFile >> closeTag: aTag indent: times newLine: aBoolean [
 	
 ]
 
-{ #category : #'private - writing basic' }
+{ #category : 'private - writing basic' }
 XPDFile >> indent: times [
 
 	times timesRepeat: [ stream tab ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 XPDFile >> initialize [ 
 	super initialize.
 	stream := String new writeStream.
-	builder := XPDModelBuilder new build.
+	builder := XPDModelBuilder latestAvailable new build.
 ]
 
-{ #category : #'private - writing basic' }
+{ #category : 'private - writing basic' }
 XPDFile >> newLine [
 	stream crlf 
 ]
 
-{ #category : #'private - writing basic' }
+{ #category : 'private - writing basic' }
 XPDFile >> openTag: aTag indent: times [
 	self newLine.
 	self indent: times.
@@ -64,23 +66,23 @@ XPDFile >> openTag: aTag indent: times [
 	
 ]
 
-{ #category : #'private - writing basic' }
+{ #category : 'private - writing basic' }
 XPDFile >> raw: aString [
 
 	stream nextPutAll: aString
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 XPDFile >> stream [
 	^ stream
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 XPDFile >> stream: anObject [
 	stream := anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XPDFile >> visitXDPClass: anXDPClass with: anIndex [
 	self
 		newLine;
@@ -115,13 +117,13 @@ XPDFile >> visitXDPClass: anXDPClass with: anIndex [
 		closeTag: 'XPD:OBJ' indent: 5 newLine: true
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XPDFile >> visitXDPGeneralization: aGeneralization with: anIndex [
 
 	self writeXDPRelationship: aGeneralization stereotype: 'UMLGeneralization' from: 'Child' to: 'Parent' with: anIndex
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XPDFile >> visitXDPModel: aModel [
 	
 	self
@@ -149,7 +151,7 @@ XPDFile >> visitXDPModel: aModel [
 		
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XPDFile >> visitXDPPackage: anXDPPackage with: anIndex [
 	self
 		newLine;
@@ -184,7 +186,7 @@ XPDFile >> visitXDPPackage: anXDPPackage with: anIndex [
 		closeTag: 'XPD:OBJ' indent: 3 newLine: true
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XPDFile >> visitXDPPackageTag: anXDPPackageTag with: anIndex [
 	self
 		newLine;
@@ -219,13 +221,13 @@ XPDFile >> visitXDPPackageTag: anXDPPackageTag with: anIndex [
 		closeTag: 'XPD:OBJ' indent: 4 newLine: true
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XPDFile >> visitXDPRealization: aRealization with: anIndex [
 
 	self writeXDPRelationship: aRealization stereotype: 'UMLRealization' from: 'Client' to: 'Supplier' with: anIndex
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XPDFile >> visitXDPTrait: anXDPTrait with: anIndex [
 	self
 		newLine;
@@ -260,19 +262,19 @@ XPDFile >> visitXDPTrait: anXDPTrait with: anIndex [
 		closeTag: 'XPD:OBJ' indent: 5 newLine: true
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 XPDFile >> write [
 	self writeXMLHeader.
 	self writeXDPUnit.
 	
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 XPDFile >> writeFile [
 	
 ]
 
-{ #category : #'private - writing' }
+{ #category : 'private - writing' }
 XPDFile >> writeModel [
 	self openTag: 'XPD:BODY' indent: 1.
 	builder model visit: self.
@@ -280,7 +282,7 @@ XPDFile >> writeModel [
 
 ]
 
-{ #category : #'private - writing' }
+{ #category : 'private - writing' }
 XPDFile >> writeOwnedElementsOf: anXDPObject indent: number [
 
 	anXDPObject ownedElements ifNotEmpty: [ 		
@@ -294,14 +296,14 @@ XPDFile >> writeOwnedElementsOf: anXDPObject indent: number [
 		anXDPObject ownedElements withIndexDo: [:each :index | each visit: self with: index - 1 ]]	
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 XPDFile >> writeToClipboard [
 	self write.
 	Clipboard clipboardText: stream contents.
 	^ stream contents
 ]
 
-{ #category : #'private - writing basic' }
+{ #category : 'private - writing basic' }
 XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype for: otherEnd with: anIndex [
  
 	self
@@ -342,7 +344,7 @@ XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype for: othe
 		closeTag: 'XPD:OBJ' indent: 3 newLine: true
 ]
 
-{ #category : #'private - writing basic' }
+{ #category : 'private - writing basic' }
 XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype from: start to: otherEnd with: anIndex [
  
 	self
@@ -385,7 +387,7 @@ XPDFile >> writeXDPRelationship: aRelationship stereotype: aStereotype from: sta
 		closeTag: 'XPD:OBJ' indent: 3 newLine: true
 ]
 
-{ #category : #'private - writing' }
+{ #category : 'private - writing' }
 XPDFile >> writeXDPUnit [
 
 	self
@@ -400,14 +402,14 @@ XPDFile >> writeXDPUnit [
 		closeTag: 'XPD:UNIT' indent: 0 newLine: true.
 ]
 
-{ #category : #'private - writing' }
+{ #category : 'private - writing' }
 XPDFile >> writeXMLHeader [
 
 	self 
 		raw: '<?xml version="1.0" encoding="UTF-8"?>'
 ]
 
-{ #category : #'private - writing' }
+{ #category : 'private - writing' }
 XPDFile >> writeXPDHeader [
 
 	self 

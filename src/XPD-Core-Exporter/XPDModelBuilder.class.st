@@ -2,8 +2,8 @@
 Build an XDP model in memory 
 "
 Class {
-	#name : #XPDModelBuilder,
-	#superclass : #Object,
+	#name : 'XPDModelBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'packages',
 		'packageTags',
@@ -11,10 +11,24 @@ Class {
 		'classes',
 		'relations'
 	],
-	#category : #'XPD-Core-Exporter-Export'
+	#category : 'XPD-Core-Exporter-Export',
+	#package : 'XPD-Core-Exporter',
+	#tag : 'Export'
 }
 
-{ #category : #'private - accessing' }
+{ #category : 'accessing' }
+XPDModelBuilder class >> latestAvailable [
+	"Return the most recent available"
+	
+	|use|
+	7 to: SystemVersion current major do: [:version |
+		Smalltalk 
+			at: (#XPDModelBuilderPharo , version asString) asSymbol
+			ifPresent: [:found| use := found ]].
+	^ use
+]
+
+{ #category : 'private - accessing' }
 XPDModelBuilder >> allSortedPharoPackages [
 	"Return a sorted list of all Pharo packages"
 	| coll |
@@ -25,14 +39,14 @@ XPDModelBuilder >> allSortedPharoPackages [
 	^coll
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 XPDModelBuilder >> allSortedPharoPackagesDebug [
 	"Return a sorted list of all Pharo packages"
 	^Array with: (RPackage organizer packages 
 		sorted: [:a1 :a2 | a1 name < a2 name ]) first
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 XPDModelBuilder >> build [
 	<script: 'self new build inspect'>
 	self 
@@ -41,7 +55,7 @@ XPDModelBuilder >> build [
 		buildRelations
 ]
 
-{ #category : #'private - building relationships' }
+{ #category : 'private - building relationships' }
 XPDModelBuilder >> buildGeneralizationBetween: aXPDClass andSuperclass: aXPDClass2 [
 
 	| rel |
@@ -50,7 +64,7 @@ XPDModelBuilder >> buildGeneralizationBetween: aXPDClass andSuperclass: aXPDClas
 	relations add: rel
 ]
 
-{ #category : #'private - building relationships' }
+{ #category : 'private - building relationships' }
 XPDModelBuilder >> buildGeneralizations [
 	"We only have one superclass in Pharo"
 	
@@ -63,21 +77,21 @@ XPDModelBuilder >> buildGeneralizations [
 	]
 ]
 
-{ #category : #'private - building' }
+{ #category : 'private - building' }
 XPDModelBuilder >> buildModel [
 
 	model := XPDModel new.
 	
 ]
 
-{ #category : #'private - building' }
+{ #category : 'private - building' }
 XPDModelBuilder >> buildPackages [
 
 	self allSortedPharoPackages do: [:each | 
 		self buildXDPPackageFor: each ].
 ]
 
-{ #category : #'private - building relationships' }
+{ #category : 'private - building relationships' }
 XPDModelBuilder >> buildRealizationBetween: aXPDClass andTrait: aXDPTrait [ 
 
 	| rel |
@@ -86,7 +100,7 @@ XPDModelBuilder >> buildRealizationBetween: aXPDClass andTrait: aXDPTrait [
 	relations add: rel
 ]
 
-{ #category : #'private - building relationships' }
+{ #category : 'private - building relationships' }
 XPDModelBuilder >> buildRealizations [
 	"check for the traits"
 	
@@ -97,14 +111,25 @@ XPDModelBuilder >> buildRealizations [
 			traitWrapper ifNotNil: [ self buildRealizationBetween: each andTrait: traitWrapper ]]]
 ]
 
-{ #category : #'private - building' }
+{ #category : 'private - building' }
 XPDModelBuilder >> buildRelations [
 	self 
 		buildGeneralizations;  "for superclass inheritance"
 		buildRealizations  	  "for Traits"
 ]
 
-{ #category : #'private - building' }
+{ #category : 'private - building' }
+XPDModelBuilder >> buildUntaggedClassesFor: anRPackage in: package [
+
+
+	| untagged |
+	untagged := anRPackage classes select: [ :each |
+					 each packageTag name = #Uncategorized
+						or: [ each packageTag = each packageTag isUndefined ] ].
+	untagged do: [ :each | self buildXDPClassFor: each in: package ]
+]
+
+{ #category : 'private - building' }
 XPDModelBuilder >> buildXDPClassFor: aClass in: aXDPPackageTag [ 
 	
 	|cls|	
@@ -115,30 +140,20 @@ XPDModelBuilder >> buildXDPClassFor: aClass in: aXDPPackageTag [
 	classes at: aClass name asSymbol put: cls.
 ]
 
-{ #category : #'private - building' }
+{ #category : 'private - building' }
 XPDModelBuilder >> buildXDPPackageFor: anRPackage [
 
-	| package untagged |
-
-	package := XPDPackage source: anRPackage.	
+	| package   |
+	package := XPDPackage source: anRPackage.
 	model addOwnedElement: package.
 	packages at: anRPackage name asSymbol put: package.
-	(anRPackage actualClassTags 
-		sorted: [:a1 :a2 | a1 name < a2 name ]) 
-		do: [:each | self buildXDPPackageTagFor: each in: package ].
-		
+	(anRPackage actualClassTags sorted: [ :a1 :a2 | a1 name < a2 name ])
+		do: [ :each | self buildXDPPackageTagFor: each in: package ].
 
-		
-	untagged := anRPackage classes select: [:each | 
-			(anRPackage classTagForClass: each) notNil and: [ (anRPackage classTagForClass: each) name = anRPackage name ]  ].
-	untagged do: [:each | 
-		 self buildXDPClassFor: each in: package ].
-		
-		
-
+	self buildUntaggedClassesFor: anRPackage in: package
 ]
 
-{ #category : #'private - building' }
+{ #category : 'private - building' }
 XPDModelBuilder >> buildXDPPackageTagFor: anRPackageTag in: anXDPPackage [
 
 	| packageTag |
@@ -149,7 +164,7 @@ XPDModelBuilder >> buildXDPPackageTagFor: anRPackageTag in: anXDPPackage [
 		self buildXDPClassFor: each in: packageTag ]
 ]
 
-{ #category : #'private - initialization' }
+{ #category : 'private - initialization' }
 XPDModelBuilder >> initialize [
 	super initialize.
 	packages := Dictionary new.
@@ -158,7 +173,7 @@ XPDModelBuilder >> initialize [
 	relations := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDModelBuilder >> model [
 	^ model
 ]

@@ -2,16 +2,18 @@
 XDP relationship
 "
 Class {
-	#name : #XPDRelationship,
-	#superclass : #XPDElement,
+	#name : 'XPDRelationship',
+	#superclass : 'XPDElement',
 	#instVars : [
 		'from',
 		'to'
 	],
-	#category : #'XPD-Core-Exporter-Model'
+	#category : 'XPD-Core-Exporter-Model',
+	#package : 'XPD-Core-Exporter',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 XPDRelationship class >> from: aClass to: aSuperclass [
 
 	^(self new)
@@ -20,32 +22,32 @@ XPDRelationship class >> from: aClass to: aSuperclass [
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 XPDRelationship class >> isAbstract [ 
 	^self name = #XPDRelationship
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDRelationship >> from [
 	^ from
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDRelationship >> from: anObject [
 	from := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDRelationship >> to [
 	^ to
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDRelationship >> to: anObject [
 	to := anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XPDRelationship >> visit: aVisitor with: argument [
 
 	self subclassResponsibility

@@ -2,37 +2,39 @@
 An XDP Element
 "
 Class {
-	#name : #XPDElement,
-	#superclass : #Object,
+	#name : 'XPDElement',
+	#superclass : 'Object',
 	#instVars : [
 		'guid',
 		'parent'
 	],
-	#category : #'XPD-Core-Exporter-Model'
+	#category : 'XPD-Core-Exporter-Model',
+	#package : 'XPD-Core-Exporter',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDElement >> guid [
 	^ guid
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDElement >> guid: anObject [
 	guid := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 XPDElement >> initialize [
 	super initialize.
 	guid := UUID new asString copyReplaceAll: '-' with: String empty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDElement >> parent [
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XPDElement >> parent: anObject [
 	parent := anObject
 ]

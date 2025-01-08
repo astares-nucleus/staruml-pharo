@@ -1,1 +1,1 @@
-Package { #name : #'XPD-Core-Exporter' }
+Package { #name : 'XPD-Core-Exporter' }
