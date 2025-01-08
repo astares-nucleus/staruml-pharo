@@ -8,3 +8,9 @@ Class {
 	#package : 'XPD-Core-Exporter',
 	#tag : 'Export'
 }
+
+{ #category : 'defaults' }
+XPDModelBuilderPharo11 >> organizer [
+
+	^ Package packageOrganizer
+]

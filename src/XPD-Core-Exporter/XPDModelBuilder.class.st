@@ -32,7 +32,7 @@ XPDModelBuilder class >> latestAvailable [
 XPDModelBuilder >> allSortedPharoPackages [
 	"Return a sorted list of all Pharo packages"
 	| coll |
-	coll := (RPackage organizer packages 
+	coll := (self organizer packages 
 				sorted: [:a1 :a2 | a1 name < a2 name ])
 				asOrderedCollection.
 	coll remove: self class package.
@@ -176,4 +176,10 @@ XPDModelBuilder >> initialize [
 { #category : 'accessing' }
 XPDModelBuilder >> model [
 	^ model
+]
+
+{ #category : 'defaults' }
+XPDModelBuilder >> organizer [
+
+	^ RPackage organizer
 ]
